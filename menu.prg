@@ -1,9 +1,8 @@
-request hb_lang_pt
-request HB_codepage_utf8
-
-function Menu()
+function Menu
 public nValor := 0
 public nSaldo := 0
+
+request HB_codepage_utf8 
 
 SET DATE BRITISH
 SET CENT ON
@@ -11,8 +10,6 @@ SET CENT ON
 SET DELIMITERS ON
 SET DELIMITERS TO "[]"
 SET COLOR TO "G/W, W+/G+"
-
-   hb_langSelect("PT")
    hb_cdpSelect("UTF8")
    dbstart()
    USE conta
