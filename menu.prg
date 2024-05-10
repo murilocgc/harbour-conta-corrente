@@ -1,8 +1,16 @@
+#include "sqlrdd.ch"
+
 function Menu
 public nValor := 0
 public nSaldo := 0
+public cUse 
+public cCreate
+public pCode
+public usecode
 
-request HB_codepage_utf8 
+//request HB_codepage_utf8
+request SR_ODBC
+request SQLRDD 
 
 SET DATE BRITISH
 SET CENT ON
@@ -10,9 +18,27 @@ SET CENT ON
 SET DELIMITERS ON
 SET DELIMITERS TO "[]"
 SET COLOR TO "G/W, W+/G+"
-   hb_cdpSelect("UTF8")
+   //hb_cdpSelect("UTF8")
    dbstart()
-   USE conta
+   cls
+   connect()
+   inkey(2)
+
+   cUse := "USE HARBOUR"
+   cSql := "select * from aluno"
+   
+   
+   usecode := SR_SQLParse(cUse)  
+   
+   pCode := SR_SQLParse(cSql)
+   
+   ?SR_SQLCodeGen(usecode)
+   ?"acessou o banco"
+   inkey(4)
+
+   ?SR_SQLCodeGen(pCode)
+   ?"fez o select"
+   inkey(4)
 
    DO WHILE .T.
       CLS
@@ -107,3 +133,10 @@ function dbstart
    APPEND BLANK
    
 return nil
+
+function connect
+   ? "add", SR_AddConnection( 1, "dsn=SQL Server1")
+   ? "getative", SR_GetActiveConnection()
+   ? "getconnectio", SR_GetConnection(1)
+
+return
