@@ -66,6 +66,8 @@ SET COLOR TO "G/W, W+/G+"
                nSaldo := CalculaDeposito( nSaldo, nValor )            
                
                SR_BeginTransaction() //Begin
+               Csql := "INSERT INTO LANCAMENTOS VALUES ( " + SqlQuoted(nValor) + ", 'C'" + ", 'SELECT GETDATE()' )"
+               RetSql( cSql )
 
                cSql := "INSERT INTO SALDO_CC VALUES ( " + SqlQuoted(nSaldo) + " )"
                RetSql( cSql )
@@ -96,6 +98,8 @@ SET COLOR TO "G/W, W+/G+"
                nSaldo := CalculaSaque( nSaldo, nValor)   
 
                SR_BeginTransaction() //Begin
+               Csql := "INSERT INTO LANCAMENTOS VALUES ( " + SqlQuoted(nValor) + ", 'D'" + ", '(SELECT GETDATE())' )"
+               RetSql( cSql )
 
                cSql := "INSERT INTO SALDO_CC VALUES ( " + SqlQuoted(nSaldo) + " )"
                RetSql( cSql )
@@ -185,3 +189,5 @@ Function SqlQuoted(xValue)
    cValue := "'" + AllTrim(Str(xValue)) + "'"  
 
 Return cValue
+
+****************************************************************************

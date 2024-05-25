@@ -119,3 +119,36 @@ RetCode           :         -1
 SR_ODBC:EXEC     Linha : 379
 RETSQL     Linha : 174
 MENU     Linha : 101	
+25/05/2024 19:58:46: SQLExecDirect Error
+42S22 - 207 - [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Nome de coluna 'D' inválido.
+Command sent to database : 
+INSERT INTO LANCAMENTOS VALUES ( '600.00', D, '' )
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 180
+MENU     Linha : 104	
+25/05/2024 20:10:47: SQLExecDirect Error
+22007 - 241 - [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Falha ao converter data e/ou hora da cadeia de caracteres.
+Command sent to database : 
+INSERT INTO LANCAMENTOS VALUES ( '800.00', 'C', 'SELECT GETDATE()' )
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 178
+MENU     Linha : 70	
+25/05/2024 20:11:53: SQLExecDirect Error
+22007 - 241 - [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Falha ao converter data e/ou hora da cadeia de caracteres.
+Command sent to database : 
+INSERT INTO LANCAMENTOS VALUES ( '500.00', 'C', 'SELECT GETDATE()' )
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 178
+MENU     Linha : 70	

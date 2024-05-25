@@ -1,14 +1,14 @@
 ----------------------------- xHarbour Error Log ------------------------------
 
 Date...............: 25/05/2024
-Time...............: 18:32:54
+Time...............: 20:11:56
 
 Application name...: MENU
 Workstation name...: MURILO
 Available memory...: 2097151
 Current disk.......: C
 Current directory..: Git\harbour-conta-corrente
-Free disk space....: 40002154496
+Free disk space....: 39344357376
 
 Operating system...: Windows NT Professional 6.02.9200
 xHarbour version...: xHarbour build 1.2.1 Intl. (SimpLex) (Rev. 9438)
@@ -92,46 +92,54 @@ SET UNIQUE.........: OFF
 SET VIDEOMODE......: 0
 SET WRAP...........: OFF
 
-------------------------------------------------------------------------------------Detailed Work Area Items-------------------------------------------------------------------------------------
+----------------------------------------------------------------Detailed Work Area Items-----------------------------------------------------------------
 
 
------------------------------------------------------------------------------ Internal Error Handling Information  ------------------------------------------------------------------------------
+--------------------------------------------------------- Internal Error Handling Information  ----------------------------------------------------------
 
-Subsystem Call ....: BASE
-System Code .......: 1081
+Subsystem Call ....: SR_ODBC
+System Code .......: 0
 Default Status ....: .F.
-Description .......: Argument error
-Operation .........: +
-Arguments .........:  [ 1] = Type: C Val: INSERT INTO SALDO_CC VALUES (  [ 2] = Type: N Val:       3700.00
+Description .......: SQLExecDirect Error
+22007 - 241 - [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Falha ao converter data e/ou hora da cadeia de caracteres.
+Command sent to database : 
+INSERT INTO LANCAMENTOS VALUES ( '500.00', 'C', 'SELECT GETDATE()' )
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+ - RollBack executed.
+Operation .........: 
+Arguments .........: 
 Involved File .....: 
 Dos Error Code ....: 0
 
  Trace Through:
 ----------------
+SR_ODBC:RUNTIMEERR    :     864 in Module: ..\source\sqlconnection.prg
+SR_ODBC:RUNTIMEERR    :     889 in Module: ..\source\sqlconnection.prg
+SR_ODBC:EXEC          :     379 in Module: ..\source\sqlconnection.prg
+RETSQL                :     178 in Module: menu.prg
 MENU                  :      70 in Module: menu.prg
 
 
-####################################################################################### Video Screen Dump #######################################################################################
+################################################################### Video Screen Dump ###################################################################
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                                                                                                                                                                                                  |
-|                                                                                                                                                                                                  |
-|     ษออออออออออออออออออออออออออออออออออป                                                                                                                                                         |
-|     บ                                  บ                                                                                                                                                         |
-|     บInforme o valor [  2.000,00]      บ                                                                                                                                                         |
-|     บ                                  บ                                                                                                                                                         |
-|     บ                                  บ                                                                                                                                                         |
-|     ศออออออออออออออออออออออออออออออออออผ                                                                                                                                                         |
-|                                                                                                                                                                                                  |
-|                                                                                                                                                                                                  |
-|                                                                                                                                                                                                  |
-|                                                                                                                                                                                                  |
-|                                                                                                                                                                                                  |
-|                                                                                                                                                                                                  |
-|                                                                                                                                                                                                  |
-|Error BASE/1081  Argument error: + Arguments: ( [ 1] = Type: C Val: INSERT INTO SALDO_CC VALUES (  [ 2] = Type: N Val:       3700.00)                                                             |
-|                                                                                                                                                                                                  |
-|Error at ...: MENU(70) in Module: menu.prg                                                                                                                                                        |
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                                                                                                                                          |
+|Error SR_ODBC/0  SQLExecDirect Error                                                                                                                      |
+|22007 - 241 - [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Falha ao converter data e/ou hora da cadeia de caracteres.                            |
+|Command sent to database :                                                                                                                                |
+|INSERT INTO LANCAMENTOS VALUES ( '500.00', 'C', 'SELECT GETDATE()' )                                                                                      |
+|Steatment handle  :                                                                                                                                       |
+|Connection handle :                                                                                                                                       |
+|RetCode           :         -1                                                                                                                            |
+| - RollBack executed.                                                                                                                                     |
+|                                                                                                                                                          |
+|Error at ...: SR_ODBC:RUNTIMEERR(864) in Module: ..\source\sqlconnection.prg                                                                              |
+|Called from : SR_ODBC:RUNTIMEERR(889) in Module: ..\source\sqlconnection.prg                                                                              |
+|Called from : SR_ODBC:EXEC(379) in Module: ..\source\sqlconnection.prg                                                                                    |
+|Called from : RETSQL(178) in Module: menu.prg                                                                                                             |
+|Called from : MENU(70) in Module: menu.prg                                                                                                                |
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
