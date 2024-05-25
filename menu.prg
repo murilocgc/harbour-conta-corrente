@@ -6,9 +6,12 @@ request SQLRDD
 ****************************************************************************
 Function Menu //é a função principal
 ****************************************************************************
-public nValor := 0
-public nSaldo := 0
-public  
+local nValor := 0
+local nSaldo := 0
+local cSql
+local aAux  
+local aAux2  
+local aAux3  
 
 SET DATE BRITISH
 SET CENT ON
@@ -17,6 +20,18 @@ SET DELIMITERS ON
 SET DELIMITERS TO "[]"
 SET COLOR TO "G/W, W+/G+" 
    Begin Sequence
+
+      cSql := "SELECT TOP 1 SALDO FROM SALDO_CC" +;
+                  " ORDER BY IDSALDO DESC"
+
+      aAux := RetSql( cSql )
+      For Each aAux2 in aAux
+         For Each aAux3 in aAux2
+            nSaldo := aAux3
+         Next
+      Next   
+
+
       DO WHILE .T.
          CLS
          @ 2, 1 SAY "Conta Corrente V2"
@@ -24,11 +39,11 @@ SET COLOR TO "G/W, W+/G+"
 
          @ 4 , 5 TO 10 , 40 DOUBLE // Crio um box com @ ... TO
 
-         @ 5 ,20 PROMPT " Depósito " MESSAGE "Realizar um depósito na Conta corrente"
+         @ 5 ,20 PROMPT " Deposito " MESSAGE "Realizar um deposito na Conta corrente"
          @ 6 ,20 PROMPT " Saque " MESSAGE "Realizar um saque na Conta corrente"
-         @ 7 ,20 PROMPT " Sair " MESSAGE "Encerra o programa "
+         @ 7 ,20 PROMPT " VAZAR " MESSAGE "EXPLODE TUDO "
 
-         @ 9, 8 SAY "Saldo: " + transform(saldo, "@E 999,999.99")
+         @ 9, 8 SAY "Saldo: " + transform(nSaldo, "@E 999,999.99")
          SET MESSAGE TO 11 // aqui esta setando para imprimir as mensagens na linha 9
 
          // Aqui eu seleciono a opcao
@@ -36,7 +51,7 @@ SET COLOR TO "G/W, W+/G+"
 
          // Aqui eu analiso o valor de nOpcao
          DO CASE
-         CASE nOpcao == 1
+         CASE nOpcao == 1 // opção Deposito
             CLS
             @ 1, 1 SAY "Conta Corrente v1"
             @ 1, 22 SAY DATE()
@@ -48,8 +63,16 @@ SET COLOR TO "G/W, W+/G+"
             @ 6 , 6 SAY "Informe o valor" GET nValor PICTURE "@E 999,999.99"
             READ
             if nValor > 0 
-               CalculaDeposito()            
-               replace Saldo with nSaldo
+               nSaldo := CalculaDeposito( nSaldo, nValor )            
+               
+               SR_BeginTransaction() //Begin
+
+               cSql := "INSERT INTO SALDO_CC VALUES ( " + SqlQuoted(nSaldo) + " )"
+               RetSql( cSql )
+               // registra o saldo no banco
+
+               SR_CommitTransaction() //Commmit
+
             else
                @ 11, 0 SAY "Digite um valor maior que zero para o deposito!"
                inkey(3)
@@ -57,7 +80,7 @@ SET COLOR TO "G/W, W+/G+"
             endif 
 
             
-         CASE nOpcao == 2
+         CASE nOpcao == 2 // opção Saque
             CLS
             @ 1, 1 SAY "Conta Corrente v1"
             @ 1, 22 SAY DATE()
@@ -70,8 +93,16 @@ SET COLOR TO "G/W, W+/G+"
             READ
 
             if nValor > 0            
-               CalculaSaque()
-               replace Saldo with nSaldo                       
+               nSaldo := CalculaSaque( nSaldo, nValor)   
+
+               SR_BeginTransaction() //Begin
+
+               cSql := "INSERT INTO SALDO_CC VALUES ( " + SqlQuoted(nSaldo) + " )"
+               RetSql( cSql )
+               // registra o saldo no banco
+
+               SR_CommitTransaction() //Commmit
+
             else
                @ 11, 0 SAY "Digite um valor maior que zero para o saque!"
                inkey(3)
@@ -89,13 +120,13 @@ return
 
 
 ****************************************************************************
-function CalculaDeposito()
+function CalculaDeposito( nSaldo, nValor )
 ****************************************************************************
 return nSaldo := nSaldo + nValor
 
 
 ****************************************************************************
-function CalculaSaque()
+function CalculaSaque(nSaldo, nValor)
 ****************************************************************************
 return nSaldo := nSaldo - nValor
 
@@ -131,14 +162,26 @@ Function RetSql( cSql ) // Função que passa o comando SQL para o Banco
 ****************************************************************************   
 
    local oConnect    
-   local aRetSql := {}   
-   local nIdConnection
-
+   local aRetSql := {}
+   local nIdConnection  
+   
+   local apCode
+   
    nIdConnection := Connect() // obtém o id da conexão
 
-   oConnect := SR_GetCnn( nIdConnection ) // obtém o objeto da conexão
-
+   oConnect := SR_GetCnn( nIdConnection ) // obtém o objeto da conexão    
+  
    oConnect:Exec( cSql, , .T., @aRetSql )  
    //executa o método para o objeto, passando o comando sql para o banco.
 
 Return aRetSql
+
+
+****************************************************************************
+Function SqlQuoted(xValue)
+****************************************************************************
+   local cValue
+
+   cValue := "'" + AllTrim(Str(xValue)) + "'"  
+
+Return cValue

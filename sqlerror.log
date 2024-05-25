@@ -1,0 +1,121 @@
+25/05/2024 17:03:09: SQLExecDirect Error
+42000 - 102 - [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Sintaxe incorreta próxima a '900.00'.
+Command sent to database : 
+INSERT INTO SALDO_CC VALUES "900.00"
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 162
+MENU     Linha : 69	
+25/05/2024 17:08:22: SQLExecDirect Error
+42000 - 102 - [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Sintaxe incorreta próxima a '900.00'.
+Command sent to database : 
+INSERT INTO SALDO_CC VALUES 900.00
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 162
+MENU     Linha : 69	
+25/05/2024 17:21:10: SQLExecDirect Error
+42S22 - 207 - [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Nome de coluna '900.00' inválido.
+Command sent to database : 
+INSERT INTO SALDO_CC VALUES ( "900.00" )
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 172
+MENU     Linha : 71	
+25/05/2024 17:30:07: SQLExecDirect Error
+HY090 - 0 - [Microsoft][ODBC Driver Manager] Comprimento inválido de cadeia de caracteres ou de buffer
+Command sent to database : 
+
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 176
+MENU     Linha : 27	
+25/05/2024 17:30:37: SQLExecDirect Error
+HY090 - 0 - [Microsoft][ODBC Driver Manager] Comprimento inválido de cadeia de caracteres ou de buffer
+Command sent to database : 
+
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 176
+MENU     Linha : 27	
+25/05/2024 17:38:34: SQLExecDirect Error
+HY090 - 0 - [Microsoft][ODBC Driver Manager] Comprimento inválido de cadeia de caracteres ou de buffer
+Command sent to database : 
+
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 176
+MENU     Linha : 27	
+25/05/2024 17:51:40: SQLExecDirect Error
+HY090 - 0 - [Microsoft][ODBC Driver Manager] Comprimento inválido de cadeia de caracteres ou de buffer
+Command sent to database : 
+
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 179
+MENU     Linha : 27	
+25/05/2024 18:00:31: SQLExecDirect Error
+HY090 - 0 - [Microsoft][ODBC Driver Manager] Comprimento inválido de cadeia de caracteres ou de buffer
+Command sent to database : 
+
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 179
+MENU     Linha : 27	
+25/05/2024 18:01:55: SQLExecDirect Error
+42S22 - 207 - [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Nome de coluna '1200.00' inválido.
+Command sent to database : 
+INSERT INTO SALDO_CC VALUES ( "1200.00" )
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 179
+MENU     Linha : 71	
+25/05/2024 18:26:56: SQLExecDirect Error
+HY090 - 0 - [Microsoft][ODBC Driver Manager] Comprimento inválido de cadeia de caracteres ou de buffer
+Command sent to database : 
+
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 177
+MENU     Linha : 27	
+25/05/2024 18:30:24: SQLExecDirect Error
+42S22 - 207 - [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Nome de coluna '1000.00' inválido.
+Command sent to database : 
+INSERT INTO SALDO_CC VALUES ( "1000.00" )
+Steatment handle  : 
+Connection handle : 
+RetCode           :         -1
+	SR_ODBC:RUNTIMEERR     Linha : 887
+SR_ODBC:EXEC     Linha : 379
+RETSQL     Linha : 174
+MENU     Linha : 101	
