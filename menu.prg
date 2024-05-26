@@ -65,7 +65,7 @@ SET COLOR TO "G/W, W+/G+"
 
             nValor := 0
 
-            @ 6 , 6 SAY "Informe o valor" GET nValor PICTURE "@E 999,999.99"
+            @ 6 , 6 SAY "Informe o valor" GET nValor PICTURE "@E 999,999,999.99"
             READ
             if nValor > 0 
                nSaldo := CalculaDeposito( nSaldo, nValor )            
@@ -97,7 +97,7 @@ SET COLOR TO "G/W, W+/G+"
 
             nValor := 0
 
-            @ 6 , 6 SAY "Informe o valor" GET nValor PICTURE "@E 999,999.99"
+            @ 6 , 6 SAY "Informe o valor" GET nValor PICTURE "@E 999,999,999.99"
             READ
 
             if nValor > 0            
