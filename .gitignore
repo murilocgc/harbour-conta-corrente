@@ -7,3 +7,5 @@ menu.ppo
 xbuild.windows.ini
 conta.dbf
 menu.exe
+*.log
+*.xbp
