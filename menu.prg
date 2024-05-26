@@ -11,7 +11,8 @@ local nSaldo := 0
 local cSql
 local aAux  
 local aAux2  
-local aAux3  
+local aAux3
+local nIdConnection  
 
 SET DATE BRITISH
 SET CENT ON
@@ -20,17 +21,21 @@ SET DELIMITERS ON
 SET DELIMITERS TO "[]"
 SET COLOR TO "G/W, W+/G+" 
    Begin Sequence
+      nIdConnection := Connect()
 
-      cSql := "SELECT TOP 1 SALDO FROM SALDO_CC" +;
-                  " ORDER BY IDSALDO DESC"
+      SR_BeginTransaction( nIdConnection )
 
-      aAux := RetSql( cSql )
-      For Each aAux2 in aAux
-         For Each aAux3 in aAux2
-            nSaldo := aAux3
-         Next
-      Next   
+         cSql := "SELECT TOP 1 SALDO FROM SALDO_CC (NOLOCK)" +;
+                     " ORDER BY IDSALDO DESC"
 
+         aAux := RetSql( cSql )
+         For Each aAux2 in aAux
+            For Each aAux3 in aAux2
+               nSaldo := aAux3
+            Next
+         Next   
+
+      SR_CommitTransaction ( nIdConnection )
 
       DO WHILE .T.
          CLS
@@ -41,10 +46,10 @@ SET COLOR TO "G/W, W+/G+"
 
          @ 5 ,20 PROMPT " Deposito " MESSAGE "Realizar um deposito na Conta corrente"
          @ 6 ,20 PROMPT " Saque " MESSAGE "Realizar um saque na Conta corrente"
-         @ 7 ,20 PROMPT " VAZAR " MESSAGE "EXPLODE TUDO "
+         @ 7 ,20 PROMPT " Sair " MESSAGE "Encerra o programa"
 
          @ 9, 8 SAY "Saldo: " + transform(nSaldo, "@E 999,999.99")
-         SET MESSAGE TO 11 // aqui esta setando para imprimir as mensagens na linha 9
+         SET MESSAGE TO 11 // aqui esta setando para imprimir as mensagens na linha 11
 
          // Aqui eu seleciono a opcao
          MENU TO nOpcao
@@ -65,15 +70,16 @@ SET COLOR TO "G/W, W+/G+"
             if nValor > 0 
                nSaldo := CalculaDeposito( nSaldo, nValor )            
                
-               SR_BeginTransaction() //Begin
-               Csql := "INSERT INTO LANCAMENTOS VALUES ( " + SqlQuoted(nValor) + ", 'C'" + ", 'SELECT GETDATE()' )"
-               RetSql( cSql )
+               SR_BeginTransaction( nIdConnection ) //Begin
+               
+                  Csql := "INSERT INTO LANCAMENTOS VALUES ( "+ SqlQuoted(nValor) + ", 'C', (SELECT GETDATE()))"
+                  RetSql( cSql )
 
-               cSql := "INSERT INTO SALDO_CC VALUES ( " + SqlQuoted(nSaldo) + " )"
-               RetSql( cSql )
-               // registra o saldo no banco
+                  cSql := "INSERT INTO SALDO_CC VALUES ( " + SqlQuoted(nSaldo) + " )"
+                  RetSql( cSql )
+                  // registra o saldo no banco
 
-               SR_CommitTransaction() //Commmit
+               SR_CommitTransaction( nIdConnection ) //Commmit
 
             else
                @ 11, 0 SAY "Digite um valor maior que zero para o deposito!"
@@ -97,15 +103,16 @@ SET COLOR TO "G/W, W+/G+"
             if nValor > 0            
                nSaldo := CalculaSaque( nSaldo, nValor)   
 
-               SR_BeginTransaction() //Begin
-               Csql := "INSERT INTO LANCAMENTOS VALUES ( " + SqlQuoted(nValor) + ", 'D'" + ", '(SELECT GETDATE())' )"
-               RetSql( cSql )
+               SR_BeginTransaction( nIdConnection ) //Begin
 
-               cSql := "INSERT INTO SALDO_CC VALUES ( " + SqlQuoted(nSaldo) + " )"
-               RetSql( cSql )
-               // registra o saldo no banco
+                  Csql := "INSERT INTO LANCAMENTOS VALUES ( "+ SqlQuoted(nValor) + ", 'D', (SELECT GETDATE()))"
+                  RetSql( cSql )
 
-               SR_CommitTransaction() //Commmit
+                  cSql := "INSERT INTO SALDO_CC VALUES ( " + SqlQuoted(nSaldo) + " )"
+                  RetSql( cSql )
+                  // registra o saldo no banco
+
+               SR_CommitTransaction( nIdConnection ) //Commmit
 
             else
                @ 11, 0 SAY "Digite um valor maior que zero para o saque!"
