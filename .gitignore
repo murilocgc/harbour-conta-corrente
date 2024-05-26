@@ -9,3 +9,5 @@ conta.dbf
 menu.exe
 *.log
 *.xbp
+sqllog.dbf
+sqllog.dbt
