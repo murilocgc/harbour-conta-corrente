@@ -12,7 +12,8 @@ local cSql
 local aAux  
 local aAux2  
 local aAux3
-local nIdConnection  
+local nIdConnection
+local lVoltar  
 
 SET DATE BRITISH
 SET CENT ON
@@ -66,7 +67,15 @@ SET COLOR TO "G/W, W+/G+"
             nValor := 0
 
             @ 6 , 6 SAY "Informe o valor" GET nValor PICTURE "@E 999,999.99"
+            @ 8 , 6 PROMPT "Voltar"             
             READ
+            MENU TO lVoltar
+
+            If lVoltar == 1
+               exit
+            EndIf 
+         
+            
             if nValor > 0 
                nSaldo := CalculaDeposito( nSaldo, nValor )            
                
